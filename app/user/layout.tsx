@@ -1,4 +1,5 @@
 
+import FadeIn from '@/components/auth/animations/FadeIn';
 import type { Metadata } from "next";
 
 
@@ -12,10 +13,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
-    <section className=" w-full h-full ">
-      <nav></nav>
-      {children}
-    </section>
+    <FadeIn delay={.5} className='w-full h-full'>
+      <FadeIn resetWithNavigate={true} className='w-full h-full'>
+        {children}
+      </FadeIn>
+    </FadeIn>
   );
 }

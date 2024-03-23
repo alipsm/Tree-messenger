@@ -17,12 +17,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className+ " relative flex flex-col justify-center h-screen w-screen items-center bg-mirage"}>
-        <NavBar/>
+      <body className={inter.className + " relative flex flex-col justify-center h-screen w-screen items-center bg-mirage"}>
+          <NavBar />
         <div className=" relative w-full h-full">
-        {children}
+          {children}
         </div>
-        </body>
+      </body>
     </html>
   );
 }
