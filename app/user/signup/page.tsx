@@ -1,5 +1,5 @@
 import GoogleCaptchaWrapper from '@/components/auth/GoogleCaptchaWrapper';
-import RegisterForm from '@/components/auth/form/user/register';
+import RegisterForm from '@/components/auth/form/user/signUp';
 import { Metadata } from 'next';
 import React from 'react'
 

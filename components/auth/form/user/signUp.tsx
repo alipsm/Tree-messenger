@@ -1,13 +1,14 @@
 "use client";
-import TextBox from "@/components/elements/textbox";
 import React from "react";
-import UserHeaderForm from "./header";
-import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
-import Button from "@/components/elements/button";
 import axios from "axios";
 import Link from "next/link";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
-export default function LoginForm() {
+import UserHeaderForm from "./header";
+import Button from "@/components/elements/button";
+import TextBox from "@/components/elements/textbox";
+
+export default function RegisterForm() {
    const { executeRecaptcha } = useGoogleReCaptcha();
 
    async function handleSubmit() {
@@ -19,7 +20,7 @@ export default function LoginForm() {
       const captchaToken = await executeRecaptcha("inquirySubmit");
 
       const response = await axios.post(
-         "/api/v1/user/login",
+         "/api/v1/user/register",
          { captchaToken },
          {
             headers: {
@@ -33,17 +34,18 @@ export default function LoginForm() {
    }
    return (
       <div className="flex justify-center items-center h-full flex-col gap-4 relative">
-         <UserHeaderForm title="Login" info="please enter your tree data " />
+         <UserHeaderForm title="Sign Up" info="please create your tree" />
          <br />
          <div className="flex flex-col gap-5">
             <TextBox placeholder="Tree-Surname" />
             <TextBox placeholder="Password" />
+            <TextBox placeholder="Confirm Password" />
          </div>
-         <Button text="Login" onclick={handleSubmit} />
+         <Button text="Register" onclick={handleSubmit} />
          <p className=" text-cadetGrey">
-            I don't hove any tree,{" "}
-            <Link href={"signup"} className="text-mistBlue underline hover:opacity-80 transition-opacity">
-               <strong>SignUp</strong>
+            I have a tree,{" "}
+            <Link href={"login"} className="text-mistBlue underline hover:opacity-80 transition-opacity">
+               <strong>Login</strong>
             </Link>
          </p>
       </div>
