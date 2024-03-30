@@ -7,20 +7,17 @@ import FadeIn from '@/components/auth/animations/FadeIn'
 
 export default function NavBar() {
   return (
-    <nav className='flex justify-center items-center w-full bg-shark h-14 text-white'>
-      <FadeIn className='flex justify-center items-center gap-2'>
-
-        <Image src={tree_log}
-        alt='tree logo'
-        width={20}
-        
-        />
-        <h1 className=' text-xl'>
-            <strong>
-                Tree-Messanger
-            </strong>
-        </h1>
+     <nav className="flex justify-center items-center w-full bg-shark h-10 tablet:h-14 text-white">
+        <FadeIn className="flex justify-center items-center gap-2">
+           <Image
+              src={tree_log}
+              className="w-4 tablet:w-5"
+              alt="tree logo"
+           />
+           <h1 className=" text-xs tablet:text-lg">
+              <strong>Tree-Messanger</strong>
+           </h1>
         </FadeIn>
-    </nav>
-  )
+     </nav>
+  );
 }

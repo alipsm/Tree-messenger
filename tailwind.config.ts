@@ -7,6 +7,11 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    screens: {
+      'tablet': '640px',
+      'laptop': '1024px',
+      'desktop': '1280px',
+    },
     colors: {
       mirage: '#181C20',
       shark: '#21262B',
