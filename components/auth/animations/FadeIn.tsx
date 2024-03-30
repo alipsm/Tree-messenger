@@ -3,17 +3,11 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { usePathname } from 'next/navigation'
 
-FadeIn.defaultProps = {
-    className: "",
-    duration: 1,
-    delay: 0,
-    resetWithNavigate: false
-}
 
 export default function FadeIn({
-    key, duration, delay, className, children, resetWithNavigate
+    key, duration=1, delay=0, className, children, resetWithNavigate=false
 }: {
-    key?: any, duration?: number, delay?: number, className?: string, children: React.ReactNode, resetWithNavigate: boolean
+    key?: any, duration?: number, delay?: number, className?: string, children: React.ReactNode, resetWithNavigate?: boolean
 }) {
 
     return (
@@ -37,5 +31,5 @@ const getSubdirectory=()=>{
     return subdirectory
 }
 
-const choiseKey = (key:any,reset:boolean)=>key || reset && getSubdirectory()
+const choiseKey = (key:any,reset:boolean|undefined)=>key || reset && getSubdirectory()
 
