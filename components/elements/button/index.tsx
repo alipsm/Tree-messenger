@@ -11,7 +11,7 @@ export default function Button(props: TextBoxInterface) {
             <input
                 type={"button"}
                 onClick={()=>props.onclick?.()}
-                className='text-white bg-mistBlue py-3 px-4 rounded  cursor-pointer hover:opacity-90 transition-opacity'
+                className='text-white bg-mistBlue py-2 px-4 rounded cursor-pointer hover:opacity-90 transition-opacity'
                 value={props.text}
             />
         </div>
