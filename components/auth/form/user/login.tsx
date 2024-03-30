@@ -1,11 +1,13 @@
 "use client";
-import TextBox from "@/components/elements/textbox";
 import React from "react";
-import UserHeaderForm from "./header";
-import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
-import Button from "@/components/elements/button";
 import axios from "axios";
-import Link from "next/link";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+
+import TextBox from "@/components/elements/textbox";
+import Button from "@/components/elements/button";
+
+const Header = require("./layouts/header");
+const Footer = require("./layouts/footer");
 
 export default function LoginForm() {
    const { executeRecaptcha } = useGoogleReCaptcha();
@@ -33,19 +35,17 @@ export default function LoginForm() {
    }
    return (
       <div className="flex justify-center items-center h-full flex-col gap-4 relative">
-         <UserHeaderForm title="Login" info="please enter your tree data " />
+         {Header({ title: "Login", info: "please enter your tree data " })}
          <br />
          <div className="flex flex-col gap-5">
             <TextBox placeholder="Tree-Surname" />
             <TextBox placeholder="Password" />
          </div>
          <Button text="Login" onclick={handleSubmit} />
-         <p className=" text-cadetGrey">
-            I don't hove any tree,{" "}
-            <Link href={"signup"} className="text-mistBlue underline hover:opacity-80 transition-opacity">
-               <strong>SignUp</strong>
-            </Link>
-         </p>
+         {Footer({
+            text: "I don't hove any tree,",
+            link: { text: "SignUp", href: "signup" },
+         })}
       </div>
    );
 }

@@ -34,7 +34,7 @@ export default function TextBox(props: TextBoxInterface) {
                 onChange={e => props.getValue?.(e)}
                 style={{outlineColor:positionType?.color}}
                 placeholder={props.placeholder}
-                className='text-white outline-none bg-shark py-3 px-4 rounded placeholder-cadetGrey outline-1 ou tline-[#19C18F]'
+                className='text-white outline-none bg-shark py-3 px-4 rounded placeholder-cadetGrey outline-1 text-base tablet:text-lg'
                 name={props.name}
             />
 

@@ -1,12 +1,13 @@
 "use client";
 import React from "react";
 import axios from "axios";
-import Link from "next/link";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
-import UserHeaderForm from "./header";
 import Button from "@/components/elements/button";
 import TextBox from "@/components/elements/textbox";
+
+const Header = require("./layouts/header");
+const Footer = require("./layouts/footer");
 
 export default function RegisterForm() {
    const { executeRecaptcha } = useGoogleReCaptcha();
@@ -34,7 +35,7 @@ export default function RegisterForm() {
    }
    return (
       <div className="flex justify-center items-center h-full flex-col gap-4 relative">
-         <UserHeaderForm title="Sign Up" info="please create your tree" />
+         {Header({ title: "Sign Up", info: "please create your tree" })}
          <br />
          <div className="flex flex-col gap-5">
             <TextBox placeholder="Tree-Surname" />
@@ -42,12 +43,10 @@ export default function RegisterForm() {
             <TextBox placeholder="Confirm Password" />
          </div>
          <Button text="Register" onclick={handleSubmit} />
-         <p className=" text-cadetGrey">
-            I have a tree,{" "}
-            <Link href={"login"} className="text-mistBlue underline hover:opacity-80 transition-opacity">
-               <strong>Login</strong>
-            </Link>
-         </p>
+         {Footer({
+            text: "I have a tree,",
+            link: { text: "Login", href: "login" },
+         })}
       </div>
    );
 }
