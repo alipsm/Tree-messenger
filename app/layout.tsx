@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className + " relative flex flex-col justify-center h-screen w-screen items-center bg-mirage"}>
           <NavBar />
-        <div className=" relative w-full h-full">
+        <div className=" relative w-full h-full overflow-hidden">
           {children}
         </div>
       </body>
