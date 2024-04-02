@@ -15,7 +15,7 @@ export default function NavBar() {
    };
 
    const router = useRouter();
-   const isTokenExist = true;
+   const isTokenExist = localStorage.getItem("token");
    useEffect(() => {
       if (isTokenExist && !IsDashboard()) router.push("/dashboard");
       else if (!isTokenExist) router.push("/user/login");
