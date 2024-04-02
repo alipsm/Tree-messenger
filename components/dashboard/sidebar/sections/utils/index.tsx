@@ -13,25 +13,25 @@ export default function Utils() {
             title:"Find User",
             subtitle:"search user with tree ID",
             ico:<FaUser className='text-cadetGrey w-6 h-6' width={20} height={20}/>,
-            link:"search-user"
+            link:"/dashboard/search-user"
         },
         {
             title:"Post",
             subtitle:"send message in the specific time",
             ico:<LiaParachuteBoxSolid   className='text-cadetGrey w-6 h-6' width={20} height={20}/>,
-            link:"post"
+            link:"/dashboard/post"
         },
         {
             title:"Build QR Message",
             subtitle:"encrypt your message in the QR code",
             ico:<BsQrCode    className='text-cadetGrey w-6 h-6' width={20} height={20}/>,
-            link:"build-qr-message"
+            link:"/dashboard/build-qr-message"
         },
         {
             title:"Scan QR Message",
             subtitle:"scan and encrypt you QR message",
             ico:<TbScan className='text-cadetGrey w-6 h-6' width={20} height={20}/>,
-            link:"encrypt-qr-message"
+            link:"/dashboard/encrypt-qr-message"
         }
     ]
   return (
