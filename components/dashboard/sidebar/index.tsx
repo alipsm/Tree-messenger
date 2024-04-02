@@ -1,19 +1,23 @@
 "use client";
-import React from "react";
-import Banner from "./banner";
-import ContactCard from "./card";
-import Switcher from "./switcher";
+import React, { useState } from "react";
+import Banner from "./layouts/banner";
+import Switcher from "./layouts/switcher";
+import Contacts from "./sections/contacts";
+import FadeIn from "@/components/auth/animations/FadeIn";
+import Utils from "./sections/utils";
 
 export default function SideBar() {
-   // pure function
    
+   const [ switchValue, setSwitchValue] = useState("chats")
+   console.log("switch" , switchValue)
    return (
-      <div className=" relative text-white h-full bg-shark w-full tablet:w-80 px-6 py-4">
-        <Switcher/>
-        <ContactCard name="parsa" lastUpdate={"12:36"} status="online" treeID="tree-6985" />
-        <ContactCard name="melika" lastUpdate={"15:23"} status="online" treeID="tree-7543" />
-        <ContactCard name="javad" lastUpdate={"05:48"} status="online" treeID="tree-5689" />
-        <ContactCard name="reza" lastUpdate={"23:16"} status="offline" treeID="tree-4523" />
+      <div className=" relative text-white h-full bg-shark w-full tablet:w-80 tablet:min-w-80 px-6 py-4">
+        <Switcher onChange={setSwitchValue}/>
+      
+      <FadeIn key={switchValue}>
+         {switchValue === "chats" ?<Contacts/>:<Utils/>}
+      </FadeIn>
+
         <Banner/>
       </div>
    );
