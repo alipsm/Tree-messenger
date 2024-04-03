@@ -6,7 +6,9 @@ interface TextBoxInterface {
     placeholder?: string,
     name?: string,
     error?:string,
-    success?:string
+    success?:string,
+    className?:string,
+    parentClassName?:string
 }
 
 export default TextBoxInterface
