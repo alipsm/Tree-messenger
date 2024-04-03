@@ -3,7 +3,7 @@ const express = require('express');
 var bodyParser = require('body-parser')
 
 const { connectToDatabase } = require("./database/db");
-const userRoutes =  require("./v1/routes/user/signup")
+const userRoutes =  require("./v1/routes/user")
 
 const app = express();
 

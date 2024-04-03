@@ -14,22 +14,34 @@ const registerSchema = [
 ];
 
 const loginSchema = [
-  body("password")
-    .notEmpty()
-    .withMessage("فیلد پسورد خالی است")
-    .isLength({ min: 6, max: 500 })
-    .withMessage("پسورد باید حداقل شامل ۶ حرف باشد"),
-  body("email")
-    .notEmpty()
-    .withMessage("فیلد ایمیل خالی است")
-    .isEmail()
-    .withMessage("فرمت ایمیل نادرست است")
-];
+    body("password")
+      .notEmpty()
+      .withMessage("Password is Empty!")
+      .isLength({ min: 6, max: 500 })
+      .withMessage("Illegal Password length (6 characters)"),
+    body("username")
+      .notEmpty()
+      .withMessage("Username is Empity!")
+      .isLength({ min: 5, max: 40 })
+      .withMessage("Illegal Username length (5 characters)"),
+  ];
 
 module.exports = {
   registerSchema,
   loginSchema,
 };
+// const loginSchema = [
+//   body("password")
+//     .notEmpty()
+//     .withMessage("فیلد پسورد خالی است")
+//     .isLength({ min: 6, max: 500 })
+//     .withMessage("پسورد باید حداقل شامل ۶ حرف باشد"),
+//   body("username")
+//     .notEmpty()
+//     .withMessage("فیلد ایمیل خالی است")
+//     .isEmail()
+//     .withMessage("فرمت ایمیل نادرست است")
+// ];
 
 // const registerSchema = [
 //     body("username")
