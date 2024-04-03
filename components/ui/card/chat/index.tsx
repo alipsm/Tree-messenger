@@ -11,9 +11,9 @@ export default function ChatCard({
 }) {
    return (
       <div
-         className={`px-4 py-3 text-white w-max max-w-[50%] rounded-xl my-1 box-content
+         className={` py-2 px-3 tablet:px-4 tablet:py-3 text-white w-max max-w-[70%] tablet:max-w-[50%]  rounded-lg tablet:rounded-xl my-1 box-content  text-xs tablet:text-base
          ${
-            position === "right" ? "bg-mistBlue rounde d-br-none ml-auto" : "bg-cadetGrey round ed-bl-none mr-auto"
+            position === "right" ? "bg-cadetGrey ml-auto" : "bg-mistBlue mr-auto"
          }`}
       >
          {text}
