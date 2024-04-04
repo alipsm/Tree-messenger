@@ -18,6 +18,7 @@ const config: Config = {
       cadetGrey: '#8FA0AF',
       mistBlue:"#5C7487",
       white: '#F3F3F3',
+      red:"#FA7070"
     },
     extend: {
       backgroundImage: {
