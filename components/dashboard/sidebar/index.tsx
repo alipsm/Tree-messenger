@@ -5,11 +5,11 @@ import { usePathname } from "next/navigation";
 import Banner from "./layouts/banner";
 import Switcher from "./layouts/switcher";
 import Contacts from "./sections/contacts";
-import FadeIn from "@/components/auth/animations/FadeIn";
+import FadeIn from "@/components/animations/FadeIn";
 import Utils from "./sections/utils";
 
 export default function SideBar() {
-   
+
    const [switchValue, setSwitchValue] = useState("chats");
    const pathname = usePathname();
 

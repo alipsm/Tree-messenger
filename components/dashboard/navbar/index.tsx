@@ -1,11 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import React, { useEffect } from "react";
-import FadeIn from "@/components/auth/animations/FadeIn";
+import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { AiOutlineSetting } from "react-icons/ai";
 import { GiQuickSlash } from "react-icons/gi";
+
+import FadeIn from "@/components/animations/FadeIn";
 
 export default function NavBar() {
    const GetPathName = usePathname();
@@ -29,7 +30,7 @@ export default function NavBar() {
       >
          <FadeIn className="flex justify-center items-center gap-2">
             <GiQuickSlash
-               className=" relative cursor-pointer w-6 h-6  text-mistBlue hover:rotate-45 transition-transform"
+               className=" relative cursor-pointer w-6 h-6  text-mistBlue"
                width={20}
                height={20}
             />
@@ -38,11 +39,13 @@ export default function NavBar() {
             </h1>
          </FadeIn>
          {IsDashboard() && (
-            <AiOutlineSetting
-               className=" relative cursor-pointer w-6 h-6 text-white hover:rotate-45 transition-transform"
-               width={20}
-               height={20}
-            />
+            <Link href={"/dashboard/settings"}>
+               <AiOutlineSetting
+                  className=" relative cursor-pointer w-6 h-6 text-white hover:rotate-45 transition-transform"
+                  width={20}
+                  height={20}
+               />
+            </Link>
          )}
       </nav>
    );
