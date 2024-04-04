@@ -1,4 +1,9 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
+const { customAlphabet } = require('nanoid');
+const alphabet = '0123456789';
+const nanoid = customAlphabet(alphabet, 4);
+
+
 const TodoSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -7,6 +12,12 @@ const TodoSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
+  },
+  quickerID:{
+    type: String,
+    required: true,
+    default: () => nanoid(7),
+    index: { unique: true },
   },
   token:{
     type:String,

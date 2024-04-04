@@ -34,7 +34,11 @@ router.post("/signup", registerSchema, async (req, res) => {
          if (isRecaptchaValid.success !== true)
             throw new Error("Invalid reCaptcha token");
          await createUser.save();
-         return res.status(201).json(createUser);
+         return res.status(201).json({
+          token:createUser.token,
+          username:createUser.username,
+          quick_id:createUser.quickerID
+        });
       } catch (error) {
          return res.status(500).json({
             message: error.message
@@ -63,7 +67,8 @@ router.post("/login", loginSchema, async (req, res) => {
 
        return res.status(200).json({
          token:getUserData.token,
-         username:getUserData.username
+         username:getUserData.username,
+         quick_id:getUserData.quickerID
        });
      } catch (error) {
        return res.status(500).json({
