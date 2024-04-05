@@ -1,15 +1,15 @@
 "use client";
 import React from "react";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import { useRouter } from "next/navigation";
+import { useMutation } from "react-query";
 
 import Button from "@/components/elements/button";
 import TextBox from "@/components/elements/textbox";
 import useApi from "@/hooks/useApi";
-import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
 import useToast from "@/hooks/useToast";
-import { useMutation, useQuery } from "react-query";
 import useFormValidation from "@/hooks/useValidation";
+import useAppStore from "@/hooks/useStore";
 
 const Header = require("./layouts/header");
 const Footer = require("./layouts/footer");
@@ -19,6 +19,7 @@ export default function RegisterForm() {
    const { success, error } = useToast();
    const {getValidation} = useFormValidation()
    const router = useRouter();
+   const {updateUserData} = useAppStore()
 
    const mutation = useMutation({
       mutationFn: async (e: React.FormEvent) => {
@@ -34,7 +35,6 @@ export default function RegisterForm() {
          if (!validationResult.status) {
             return Promise.reject(validationResult.message)
          }
-         console.log("validation result: ", validationResult)
 
          try {
             
@@ -54,6 +54,7 @@ export default function RegisterForm() {
       },
       onSuccess: async (data: any) => {
          success("Welcome to the Quicker");
+         updateUserData(data)
          localStorage.setItem("token", data.token);
          router.replace("/dashboard");
       },
