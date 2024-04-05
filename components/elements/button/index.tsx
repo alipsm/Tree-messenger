@@ -1,21 +1,29 @@
-"use client"
+"use client";
+
+import { ReactNode } from "react";
+import { FaCircleNotch } from "react-icons/fa6";
 
 interface ButtonInterface {
-    onclick?: Function,
-    text?: string,
-    submit?: boolean
+   onclick?: Function;
+   text?: ReactNode | string;
+   submit?: boolean;
+   className?: string;
+   parentClassName?:string
+   loading?:boolean
 }
 
 export default function Button(props: ButtonInterface) {
-    return (
-        <div className=' max-w-80'>
-            <input
-                type={props.submit?"submit":"button"}
-                onClick={()=>props.onclick?.()}
-                className='text-white bg-mistBlue py-2 px-4 rounded cursor-pointer hover:opacity-90 transition-opacity text-xs tablet:text-base'
-                value={props.text}
-                
-            />
-        </div>
-    )
+   return (
+      <div className={`${props.parentClassName} max-w-80`}>
+         <button
+            type={props.submit ? "submit" : "button"}
+            disabled={props.loading ? true:false}
+            onClick={() => props.onclick?.()}
+            className={`${props.loading&& "animate-pulse"} relative flex justify-center items-center gap-2 text-white bg-mistBlue py-2 px-4 rounded cursor-pointer hover:opacity-90 transition-opacity text-xs tablet:text-base disabled:opacity-80 disabled:cursor-wait ${props.className}`}
+         >
+            {props.loading && <FaCircleNotch  className=" absolute top-1 left-1 text-white w-2 h-2 animate-spin"/>}
+            {props.text}
+         </button>
+      </div>
+   );
 }

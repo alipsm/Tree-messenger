@@ -5,11 +5,6 @@ import TextBoxInterface from './interface'
 const helpers = require("./helpers")
 const {getColor} = helpers
 
-TextBox.defaultProps = {
-    type: "text",
-    placeholder: ""
-}
-
 export default function TextBox(props: TextBoxInterface) {
 
     const positionType = (()=>{
@@ -28,13 +23,13 @@ export default function TextBox(props: TextBoxInterface) {
     })() 
 
     return (
-        <div className='max-w-80 relative'>
-            <input
+        <div className={`${props.parentClassName} relative`}>
+            <input 
                 type={props.type}
                 onChange={e => props.getValue?.(e)}
                 style={{outlineColor:positionType?.color}}
                 placeholder={props.placeholder}
-                className='text-white outline-none bg-shark py-3 px-4 rounded placeholder-cadetGrey outline-1 text-base tablet:text-lg'
+                className={`${props.className} w-full text-white outline-none bg-shark py-3 px-4 rounded placeholder-cadetGrey outline-1 text-base tablet:text-lg`}
                 name={props.name}
             />
 

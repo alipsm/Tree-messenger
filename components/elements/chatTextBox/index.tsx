@@ -1,21 +1,24 @@
 import React from "react";
 import ChatTextBoxInterface from "./interface";
+import TextBox from "../textbox";
+import Button from "../button";
+import { TbSend } from "react-icons/tb";
 
 export default function ChatTextBox(props: ChatTextBoxInterface) {
    return (
       <div
-         className={`${props.className} rounded-xl border border-cadetGrey flex flex-col  min-w-[40%]  overflow-hidden`}
+         className={`${props.className} min-w-[40%] h-14 flex items-center border border-cadetGrey rounded-xl overflow-hidden`}
       >
-         <input
-            type="text"
-            name=""
-            id=""
-            className=" bg-shark outline-none p-3 text-white opacity-70 focus:opacity-100 transition-opacity"
+         <TextBox
+            className={`opacity-70 focus:opacity-100  transition-opacity w-full`}
+            parentClassName="w-full"
+            placeholder={"Write a message..."}
          />
-         <hr className=" border border-cadetGrey" />
-         <button className=" bg-mistBlue p-3 text-white hover:opacity-80 transition-opacity">
-            Send
-         </button>
+         <Button
+            className={`  transition-opacity border border-cadetGrey rounded-none h-full overflow-hidden`}
+            parentClassName="h-full"
+            text={<TbSend className=" w-6 h-6 text-white" />}
+         />
       </div>
    );
 }

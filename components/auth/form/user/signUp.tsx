@@ -6,52 +6,77 @@ import Button from "@/components/elements/button";
 import TextBox from "@/components/elements/textbox";
 import useApi from "@/hooks/useApi";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import useToast from "@/hooks/useToast";
+import { useMutation, useQuery } from "react-query";
+import useFormValidation from "@/hooks/useValidation";
 
 const Header = require("./layouts/header");
 const Footer = require("./layouts/footer");
 
 export default function RegisterForm() {
    const { post } = useApi();
+   const { success, error } = useToast();
+   const {getValidation} = useFormValidation()
    const router = useRouter();
+
+   const mutation = useMutation({
+      mutationFn: async (e: React.FormEvent) => {
+         e.preventDefault();
+         const formData = new FormData(e.target as HTMLFormElement);
+         const objFormData = Object.fromEntries(formData.entries());
+         if (!executeRecaptcha) {
+            console.warn("captcha is not available");
+            return Promise.reject("captcha is not available");
+         }
+
+         const validationResult = getValidation(objFormData)
+         if (!validationResult.status) {
+            return Promise.reject(validationResult.message)
+         }
+         console.log("validation result: ", validationResult)
+
+         try {
+            
+            const captchaToken = await executeRecaptcha("inquirySubmit");
+            const data: any = await post("/user/signup", objFormData, {
+               headers: { "captcha-token": captchaToken },
+            });
+            const token = data?.token;
+            if (token) {
+               return Promise.resolve(data);
+            }
+         } catch (error:any) {
+            return Promise.reject(error.message)
+         }
+
+         return Promise.reject("Sorry..., Try again later");
+      },
+      onSuccess: async (data: any) => {
+         success("Welcome to the Quicker");
+         localStorage.setItem("token", data.token);
+         router.replace("/dashboard");
+      },
+      onError: async (err: string) => {
+         error(err);
+      },
+      onSettled: async () => {},
+   });
 
    const { executeRecaptcha } = useGoogleReCaptcha();
 
-   async function handleSubmit(e: React.FormEvent) {
-      e.preventDefault();
-      const formData = new FormData(e.target as HTMLFormElement);
-      const objFormData = Object.fromEntries(formData.entries());
-
-      if (!executeRecaptcha) {
-         console.warn("captcha is not available");
-         return;
-      }
-
-      try {
-         const captchaToken = await executeRecaptcha("inquirySubmit");
-         const data: any = await post("/user/signup", objFormData, {
-            headers: { "captcha-token": captchaToken },
-         });
-         const token = data?.token;
-         if (token) {
-            localStorage.setItem("token", token);
-            router.replace("/dashboard");
-         }
-      } catch (error) {
-         console.error(error);
-      }
-   }
    return (
       <div className="flex justify-center items-center h-full flex-col gap-4 relative">
          {Header({ title: "Sign Up", info: "please create your tree" })}
          <br />
          <form
-            onSubmit={handleSubmit}
+            onSubmit={mutation.mutate}
             className="flex justify-center items-center flex-col gap-5"
          >
-            <TextBox name="username" placeholder="Tree-Surname" />
+            <TextBox name="username" placeholder="Username" />
             <TextBox name="password" placeholder="Password" />
-            <TextBox name="configmPassword" placeholder="Confirm Password" />
-            <Button text="Register" submit />
+            <TextBox name="confirm-password" placeholder="Confirm Password" />
+            <Button text="Register" submit loading={mutation.isLoading} />
          </form>
          {Footer({
             text: "I have a tree,",

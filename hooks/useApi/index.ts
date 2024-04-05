@@ -48,7 +48,7 @@ export default function useApi() {
                throw new Error(e.message);
             });
       } catch (error:any) {
-         throw Error(error);
+         throw error;
       }
    }
    return { post };

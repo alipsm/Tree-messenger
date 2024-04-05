@@ -1,5 +1,5 @@
 
-import FadeIn from '@/components/auth/animations/FadeIn';
+import FadeIn from '@/components/animations/FadeIn';
 import type { Metadata } from "next";
 
 
