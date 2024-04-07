@@ -13,11 +13,11 @@ const TodoSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  quickerID:{
+  quick_id:{
     type: String,
     required: true,
     default: () => nanoid(7),
-    index: { unique: true },
+    index: { unique: true }
   },
   token:{
     type:String,

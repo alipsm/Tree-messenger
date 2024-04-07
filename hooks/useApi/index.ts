@@ -19,14 +19,14 @@ axios.interceptors.response.use(null, (error) => {
 });
 
 export default function useApi() {
-   var token;
+   var token:string|null;
    useEffect(() => {
       token = localStorage.getItem("token");
+      if ( !!token  && token) {
+         axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      }
    }, []);
 
-   if (token !== "undefined" && token != null && token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-   }
 
    axios.defaults.headers.common["Content-Type"] = "application/json";
 
@@ -51,5 +51,27 @@ export default function useApi() {
          throw error;
       }
    }
-   return { post };
+
+   async function get(
+      path: string,
+      config?: AxiosRequestConfig
+   ) {
+      if(!!!token) throw new Error("Token is null")
+      try {
+        return await axios
+            .get(BASE_API_ENDPOINT + path,config )
+            .then((data) => {
+               return data.data;
+            })
+            .catch((e: Error | AxiosError) => {
+               if (axios.isAxiosError(e)) {
+                  throw new Error(e.response?.data["message"]);
+               }
+               throw new Error(e.message);
+            });
+      } catch (error:any) {
+         throw error;
+      }
+   }
+   return { post , get};
 }

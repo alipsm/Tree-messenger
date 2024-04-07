@@ -9,6 +9,9 @@ interface TextBoxInterface {
     success?:string,
     className?:string,
     parentClassName?:string
+    number?:boolean
+    maxLength?:number
+    removeAutoComplete?:boolean
 }
 
 export default TextBoxInterface

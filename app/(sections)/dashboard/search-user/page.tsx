@@ -1,12 +1,14 @@
-import Button from '@/components/elements/button'
-import TextBox from '@/components/elements/textbox'
-import React from 'react'
+import React from "react";
+
+import FindUserForm from "@/components/forms/find_user";
+import GoogleCaptchaWrapper from "@/components/auth/GoogleCaptchaWrapper";
 
 export default function page() {
-  return (
-    <div className='w-full h-full flex justify-center items-center flex-col gap-4'>
-      <TextBox placeholder='quick-ID:(xxxx)'/>
-      <Button text='Search'/>
-    </div>
-  )
+   return (
+      <>
+         <GoogleCaptchaWrapper>
+            <FindUserForm />
+         </GoogleCaptchaWrapper>
+      </>
+   );
 }

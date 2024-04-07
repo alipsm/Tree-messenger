@@ -1,25 +1,27 @@
 "use client";
 
 import React, { useEffect } from "react";
-import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { AiOutlineSetting } from "react-icons/ai";
 import { GiQuickSlash } from "react-icons/gi";
+import Link from "next/link";
 
 import FadeIn from "@/components/animations/FadeIn";
 
 export default function NavBar() {
    const GetPathName = usePathname();
+   const router = useRouter();
+
    const IsDashboard = () => {
       const subdirectory = GetPathName?.split("/").includes("dashboard");
       return subdirectory;
    };
 
-   const router = useRouter();
    useEffect(() => {
       const isTokenExist = localStorage.getItem("token");
-      if (isTokenExist && !IsDashboard()) router.push("/dashboard");
-      else if (!isTokenExist) router.push("/user/login");
+      if (!isTokenExist) {
+         router.push("/user/login");
+      }
    }, []);
 
    return (
@@ -35,7 +37,7 @@ export default function NavBar() {
                height={20}
             />
             <h1 className=" text-xs tablet:text-lg">
-               <strong>Quicker-Messanger</strong>
+               <strong>Quicker-Messenger</strong>
             </h1>
          </FadeIn>
          {IsDashboard() && (

@@ -24,3 +24,16 @@
 ::-webkit-scrollbar-thumb:hover {
     background: #5c7487d0;  
 }
+
+/* Remove input arrow */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

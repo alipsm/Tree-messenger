@@ -1,11 +1,10 @@
 "use client";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import React, { useEffect } from "react";
 
 export default function page() {
-   const router = useRouter()
    useEffect(()=>{
-       router.replace("/user/login")
+       redirect("/user/login")
        return ()=>{
            localStorage.removeItem("token")
        }

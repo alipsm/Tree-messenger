@@ -9,6 +9,7 @@ import Button from "@/components/elements/button";
 import useApi from "@/hooks/useApi";
 import useToast from "@/hooks/useToast";
 import useFormValidation from "@/hooks/useValidation";
+import useAppStore from "@/hooks/useStore";
 
 const Header = require("./layouts/header");
 const Footer = require("./layouts/footer");
@@ -20,6 +21,7 @@ export default function LoginForm() {
    const { post } = useApi();
    const { success, error } = useToast();
    const { getValidation } = useFormValidation();
+   const {updateUserData} = useAppStore()
    const router = useRouter();
 
    const mutation = useMutation({
@@ -55,6 +57,7 @@ export default function LoginForm() {
       },
       onSuccess: async (data: any) => {
          success("Welcome back to the Quicker");
+         updateUserData(data)
          localStorage.setItem("token", data.token);
          router.replace("/dashboard");
       },
