@@ -1,15 +1,49 @@
 "use client";
+import Button from "@/components/elements/button";
 import Switcher from "@/components/elements/switcher";
 import ListItems from "@/components/ui/list";
+import useApi from "@/hooks/useApi";
 import useAppStore from "@/hooks/useStore";
+import useToast from "@/hooks/useToast";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { FaHeart } from "react-icons/fa6";
 import { HiPencilAlt } from "react-icons/hi";
 import { MdOpenInNew } from "react-icons/md";
+import { useMutation } from "react-query";
 
 export default function SettingPage() {
-    const {user} = useAppStore()
+
+   const { user } = useAppStore()
+   const { error, success } = useToast()
+   const { delete_ } = useApi()
+
+   const router = useRouter()
+
+   const mutation = useMutation({
+      mutationFn: async () => {
+         try {
+            const data: any = await delete_(`/user/delete/${user.username}`);
+            if (data?.status) {
+               return Promise.resolve(data);
+            }
+         } catch (error: any) {
+            return Promise.reject(error.message);
+         }
+
+         return Promise.reject("Sorry..., Try again later");
+      },
+      onSuccess: async (data: any) => {
+         success(data.message)
+         router.replace("/user/login")
+      },
+      onError: async (e: Error) => {
+         error(e.message)
+      },
+   });
+
+
    const listData = {
       account_details: [
          <>
@@ -48,7 +82,7 @@ export default function SettingPage() {
                Change Quick ID
             </span>
          </div>,
-         <p className=" text-red text-center w-full">Delete Account</p>,
+         <Button text="Delete Account" onclick={mutation.mutate} parentClassName="m-auto" className=" text-red text-center" type="Text" />,
       ],
    };
 
