@@ -125,3 +125,16 @@ module.exports.core = async (req, res) => {
 
    return res.status(404).json({ message: "user not found" });
 }
+
+
+module.exports.delete = async (req,res)=>{
+   const { username } = req.params;
+   console.log(username)
+   try {
+      await User.findOneAndDelete({username})
+      return res.status(200).json({ message: "User deleted" , status: true});
+      
+   } catch (error) {
+      return res.status(503).json({message:error,status:false})
+   }
+}
