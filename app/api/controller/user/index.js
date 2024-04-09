@@ -2,6 +2,7 @@ const { validationResult } = require("express-validator");
 const { generateJWT, decodeJWT } = require("../../jwt/generate");
 const User = require("../../models/user");
 const { recaptchaValidator } = require("../../middlewares/recaptchaValidator");
+const { getAuthToken } = require("../../utils/getAuthToken");
 
 module.exports.signUp = async (req, res) => {
    try {
@@ -127,14 +128,55 @@ module.exports.core = async (req, res) => {
 }
 
 
-module.exports.delete = async (req,res)=>{
+module.exports.delete = async (req, res) => {
    const { username } = req.params;
    console.log(username)
    try {
-      await User.findOneAndDelete({username})
-      return res.status(200).json({ message: "User deleted" , status: true});
-      
+      await User.findOneAndDelete({ username })
+      return res.status(200).json({ message: "User deleted", status: true });
+
    } catch (error) {
-      return res.status(503).json({message:error,status:false})
+      return res.status(503).json({ message: error, status: false })
+   }
+}
+
+module.exports.update = async (req, res) => {
+   try {
+      const authToken = getAuthToken(req)
+      if (!!!authToken) {
+         return res.redirect(401).json({ message: "Token isn't valid" });
+      }
+
+      const captchaToken = req.headers["captcha-token"];
+      const isRecaptchaValid = await recaptchaValidator(
+         captchaToken
+      );
+      if (isRecaptchaValid.success !== true)
+         throw new Error("Invalid reCaptcha token");
+
+      const { username } = req.body;
+      try {
+         const token = generateJWT({ username });
+         const getUser = await User.findOne({ token: authToken });
+         if (!getUser)
+            return res.status(400).json({
+               message: "Sorry I'm not found you! plase relogin",
+            });
+
+         getUser.token = token
+         getUser.username = username
+
+         await getUser.save()
+         return res.status(201).json({
+            token: token,
+            username: username,
+         });
+      } catch (error) {
+         return res.status(500).json({
+            message: error.message
+         });
+      }
+   } catch (error) {
+      return res.status(500).json({ message: "Error updating user:" + error });
    }
 }

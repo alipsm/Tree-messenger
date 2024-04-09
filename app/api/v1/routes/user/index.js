@@ -11,6 +11,7 @@ const router = express.Router();
 router.post("/signup", registerSchema, userController.signUp);
 router.post("/login", loginSchema, userController.login);
 router.post("/get-user", loginSchema, userController["get-users"]);
+router.post("/update", loginSchema, userController.update);
 
 router.get("/core", userController.core)
 
