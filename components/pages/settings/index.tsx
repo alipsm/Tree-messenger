@@ -1,19 +1,18 @@
 "use client";
-
+import UpdateUsernameModal from "@/components/auth/modal/user/updateUsername";
+import Button from "@/components/elements/button";
+import Switcher from "@/components/elements/switcher";
+import ListItems from "@/components/ui/list";
+import useApi from "@/hooks/useApi";
+import useAppStore from "@/hooks/useStore";
+import useToast from "@/hooks/useToast";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { FaHeart } from "react-icons/fa6";
 import { HiPencilAlt } from "react-icons/hi";
 import { MdOpenInNew } from "react-icons/md";
 import { useMutation } from "react-query";
-import Link from "next/link";
-
-import UpdateUsernameModal from "@/components/auth/modal/user/updateUsername";
-import Switcher from "@/components/elements/switcher";
-import ListItems from "@/components/ui/list";
-import useApi from "@/hooks/useApi";
-import useAppStore from "@/hooks/useStore";
-import useToast from "@/hooks/useToast";
 
 export default function SettingPage() {
 

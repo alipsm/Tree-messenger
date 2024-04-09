@@ -124,4 +124,5 @@ export default function useApi() {
 
 
    return { post, get, delete_ ,put };
+   return { post, get, delete_ ,put };
 }
