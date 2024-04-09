@@ -19,10 +19,10 @@ axios.interceptors.response.use(null, (error) => {
 });
 
 export default function useApi() {
-   var token:string|null;
+   var token: string | null;
    useEffect(() => {
       token = localStorage.getItem("token");
-      if ( !!token  && token) {
+      if (!!token && token) {
          axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       }
    }, []);
@@ -36,7 +36,7 @@ export default function useApi() {
       config?: AxiosRequestConfig
    ) {
       try {
-        return await axios
+         return await axios
             .post(BASE_API_ENDPOINT + path, body, config)
             .then((data) => {
                return data.data;
@@ -47,7 +47,7 @@ export default function useApi() {
                }
                throw new Error(e.message);
             });
-      } catch (error:any) {
+      } catch (error: any) {
          throw error;
       }
    }
@@ -103,11 +103,10 @@ export default function useApi() {
       config?: AxiosRequestConfig
    ) {
       let token = localStorage.getItem("token")
-      console.log('token', token)
       if (!!!token) throw new Error("Token is null")
       try {
          return await axios
-            .delete(BASE_API_ENDPOINT + path, config)
+            .get(BASE_API_ENDPOINT + path, config)
             .then((data) => {
                return data.data;
             })
@@ -122,7 +121,5 @@ export default function useApi() {
       }
    }
 
-
-   return { post, get, delete_ ,put };
-   return { post, get, delete_ ,put };
+   return { post, get, delete_, put };
 }

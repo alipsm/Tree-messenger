@@ -52,7 +52,7 @@ function GetUserData() {
          !existRouteInUrl("dashboard") && router.push("/dashboard");
       },
       onError: async (e) => {
-         !existRouteInUrl("login") && router.replace("/dashboard/logout");
+         router.replace("/dashboard/logout");
       },
    });
 

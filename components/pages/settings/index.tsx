@@ -1,4 +1,12 @@
 "use client";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
+import { FaHeart } from "react-icons/fa6";
+import { HiPencilAlt } from "react-icons/hi";
+import { MdOpenInNew } from "react-icons/md";
+import { useMutation } from "react-query";
+
 import UpdatePasswordModal from "@/components/auth/modal/user/updatePassword";
 import UpdateUsernameModal from "@/components/auth/modal/user/updateUsername";
 import Button from "@/components/elements/button";
@@ -7,13 +15,6 @@ import ListItems from "@/components/ui/list";
 import useApi from "@/hooks/useApi";
 import useAppStore from "@/hooks/useStore";
 import useToast from "@/hooks/useToast";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-import { FaHeart } from "react-icons/fa6";
-import { HiPencilAlt } from "react-icons/hi";
-import { MdOpenInNew } from "react-icons/md";
-import { useMutation } from "react-query";
 
 export default function SettingPage() {
 
@@ -90,7 +91,7 @@ export default function SettingPage() {
                Change Quick ID
             </span>
          </div>,
-         <p className=" text-red text-center w-full">Delete Account</p>,
+         <Button text="Delete Account" onclick={mutation.mutate} parentClassName="m-auto" className=" text-red text-center" type="Text" />,
       ],
    };
 
@@ -143,7 +144,7 @@ export default function SettingPage() {
 
          {/* Auth modals for update username and password */}
          {modalsData.updateUsername && <UpdateUsernameModal onClose={(e: boolean) => setModalsData({ ...modalsData, updateUsername: e })} />}
-         {modalsData.updatePassword && <UpdatePasswordModal onClose={(e: boolean) => setModalsData({ ...modalsData, updatePassword: e })}/>}
+         {modalsData.updatePassword && <UpdatePasswordModal onClose={(e: boolean) => setModalsData({ ...modalsData, updatePassword: e })} />}
       </div>
    );
 }
