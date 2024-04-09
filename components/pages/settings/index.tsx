@@ -1,4 +1,5 @@
 "use client";
+import UpdatePasswordModal from "@/components/auth/modal/user/updatePassword";
 import UpdateUsernameModal from "@/components/auth/modal/user/updateUsername";
 import Button from "@/components/elements/button";
 import Switcher from "@/components/elements/switcher";
@@ -142,6 +143,7 @@ export default function SettingPage() {
 
          {/* Auth modals for update username and password */}
          {modalsData.updateUsername && <UpdateUsernameModal onClose={(e: boolean) => setModalsData({ ...modalsData, updateUsername: e })} />}
+         {modalsData.updatePassword && <UpdatePasswordModal onClose={(e: boolean) => setModalsData({ ...modalsData, updatePassword: e })}/>}
       </div>
    );
 }
