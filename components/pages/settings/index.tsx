@@ -1,20 +1,62 @@
 "use client";
-import Switcher from "@/components/elements/switcher";
-import ListItems from "@/components/ui/list";
-import useAppStore from "@/hooks/useStore";
-import Link from "next/link";
-import React from "react";
+
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 import { FaHeart } from "react-icons/fa6";
 import { HiPencilAlt } from "react-icons/hi";
 import { MdOpenInNew } from "react-icons/md";
+import { useMutation } from "react-query";
+import Link from "next/link";
+
+import UpdateUsernameModal from "@/components/auth/modal/user/updateUsername";
+import Switcher from "@/components/elements/switcher";
+import ListItems from "@/components/ui/list";
+import useApi from "@/hooks/useApi";
+import useAppStore from "@/hooks/useStore";
+import useToast from "@/hooks/useToast";
 
 export default function SettingPage() {
-    const {user} = useAppStore()
+
+   const [modalsData, setModalsData] = useState({
+      updateUsername: false,
+      updatePassword: false,
+      deleteAccound: false
+   })
+
+   const { user } = useAppStore()
+   const { error, success } = useToast()
+   const { delete_ } = useApi()
+
+   const router = useRouter()
+
+   const mutation = useMutation({
+      mutationFn: async () => {
+         try {
+            const data: any = await delete_(`/user/delete/${user.username}`);
+            if (data?.status) {
+               return Promise.resolve(data);
+            }
+         } catch (error: any) {
+            return Promise.reject(error.message);
+         }
+
+         return Promise.reject("Sorry..., Try again later");
+      },
+      onSuccess: async (data: any) => {
+         success(data.message)
+         router.replace("/user/login")
+      },
+      onError: async (e: Error) => {
+         error(e.message)
+      },
+   });
+
+
    const listData = {
       account_details: [
          <>
             <span className=" text-white ">{user.username}</span>
-            <HiPencilAlt className=" text-shark w-5 h-5 bg-white p-1 box-content  rounded-full cursor-pointer hover:opacity-80 transition-opacity" />
+            <HiPencilAlt onClick={() => setModalsData({ ...modalsData, updateUsername: true })} className=" text-shark w-5 h-5 bg-white p-1 box-content  rounded-full cursor-pointer hover:opacity-80 transition-opacity" />
          </>,
          <>
             <span className=" text-white ">Password: ********</span>
@@ -97,6 +139,10 @@ export default function SettingPage() {
          >
             About Creator <MdOpenInNew className=" inline-block w-3 h-3" />
          </a>
+
+
+         {/* Auth modals for update username and password */}
+         {modalsData.updateUsername && <UpdateUsernameModal onClose={(e: boolean) => setModalsData({ ...modalsData, updateUsername: e })} />}
       </div>
    );
 }
