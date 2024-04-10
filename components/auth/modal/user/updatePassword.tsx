@@ -1,17 +1,21 @@
 "use client"
+
+import React from 'react'
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
+import { useMutation } from 'react-query';
+
 import Button from '@/components/elements/button';
 import TextBox from '@/components/elements/textbox';
 import Modal from '@/components/ui/modal'
 import useApi from '@/hooks/useApi';
 import useToast from '@/hooks/useToast';
-import React from 'react'
-import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
-import { useMutation } from 'react-query';
+import useFormValidation from '@/hooks/useValidation';
 
-export default function UpdatePasswordModal({onClose}:{onClose:Function}) {
+export default function UpdatePasswordModal({ onClose }: { onClose: Function }) {
 
+    const { getValidation } = useFormValidation()
     const { executeRecaptcha } = useGoogleReCaptcha();
-    const { error , success } = useToast();
+    const { error, success } = useToast();
     const { put } = useApi();
 
     const mutation = useMutation({
@@ -22,6 +26,11 @@ export default function UpdatePasswordModal({onClose}:{onClose:Function}) {
             if (!executeRecaptcha) {
                 console.warn("captcha is not available");
                 return Promise.reject("captcha is not available");
+            }
+
+            const validationResult = getValidation(objFormData)
+            if (!validationResult.status) {
+                return Promise.reject(validationResult.message)
             }
 
             try {
@@ -53,11 +62,13 @@ export default function UpdatePasswordModal({onClose}:{onClose:Function}) {
             <br />
             <form onSubmit={mutation.mutate}>
                 <TextBox name='old_password' placeholder='Old password' />
-                <br/>
-                <TextBox name="password" placeholder="New Password" />
-            <TextBox name="confirm-password" placeholder="Confirm Password" />
-            <br />
-                <Button text="update" loading={mutation.isLoading} submit parentClassName='w-full' className='m-auto'/>
+                <br />
+                <hr className=' border-cadetGrey'/>
+                <br />
+                <TextBox name="password" placeholder="New Password" parentClassName='mb-1' />
+                <TextBox name="confirm-password" placeholder="Confirm Password" />
+                <br />
+                <Button text="update" loading={mutation.isLoading} submit parentClassName='w-full' className='m-auto' />
             </form>
         </Modal>
     )

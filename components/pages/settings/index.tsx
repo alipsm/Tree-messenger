@@ -61,7 +61,7 @@ export default function SettingPage() {
          </>,
          <>
             <span className=" text-white ">Password: ********</span>
-            <HiPencilAlt className=" text-shark w-5 h-5 bg-white p-1 box-content  rounded-full cursor-pointer hover:opacity-80 transition-opacity" />
+            <HiPencilAlt onClick={() => setModalsData({ ...modalsData, updatePassword: true })} className=" text-shark w-5 h-5 bg-white p-1 box-content  rounded-full cursor-pointer hover:opacity-80 transition-opacity" />
          </>,
          <p className=" text-center w-full">
             <Link
