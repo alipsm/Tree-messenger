@@ -8,7 +8,14 @@ type State = {
 }
 
 type Action = {
-    updateUserData : (user:object)=>void
+    updateUserData : (user:object)=>void,
+    resetUserData : ()=>void
+}
+const init_user:State={
+    user:{
+        quick_id:0o00,
+        username:""
+    }
 }
 const useAppStore = create<State & Action>((set) => ({
     user: {
@@ -16,8 +23,7 @@ const useAppStore = create<State & Action>((set) => ({
         quick_id:0o00,
     },
     updateUserData:(data:object)=>set((state) => ({ user: Object.assign(state.user,data)})),
+    resetUserData:()=>set((state) => ({ user: init_user.user })),
 }))
-// increasePopulation: () => set((state:any) => ({ bears: state.bears + 1 })),
-// decreasePopulation: () => set((state:any) => ({ bears: state.bears - 1 })),
-// removeAllBears: () => set({ bears: 0 }),
-  export default useAppStore
+
+export default useAppStore
