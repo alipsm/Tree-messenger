@@ -10,6 +10,7 @@ import Modal from '@/components/ui/modal'
 import useApi from '@/hooks/useApi';
 import useToast from '@/hooks/useToast';
 import useFormValidation from '@/hooks/useValidation';
+import { encryptText } from '@/utils/encryptText';
 
 export default function UpdatePasswordModal({ onClose }: { onClose: Function }) {
 
@@ -34,21 +35,27 @@ export default function UpdatePasswordModal({ onClose }: { onClose: Function }) 
             }
 
             try {
+                let new_pass = objFormData.password as string
+                let old_pass = objFormData.old_password as string
+                objFormData.password = encryptText(new_pass)
+                objFormData.old_password = encryptText(old_pass)
+                delete objFormData["confirm-password"]
                 const captchaToken = await executeRecaptcha("inquirySubmit");
                 const data: any = await put("/user/update", objFormData, {
                     headers: { "captcha-token": captchaToken },
                 });
 
-                if (data.status) {
-                    return Promise.resolve();
+                if (data.success) {
+                    return Promise.resolve(data);
                 }
             } catch (error: any) {
                 return Promise.reject(error.message);
             }
             return Promise.reject("Please try again later");
         },
-        onSuccess: async () => {
+        onSuccess: async (data: any) => {
             success("The Password has been changed")
+            localStorage.setItem("token", data?.token)
             onClose(false);
         },
         onError: async (err: string) => {
@@ -63,7 +70,7 @@ export default function UpdatePasswordModal({ onClose }: { onClose: Function }) 
             <form onSubmit={mutation.mutate}>
                 <TextBox name='old_password' placeholder='Old password' />
                 <br />
-                <hr className=' border-cadetGrey'/>
+                <hr className=' border-cadetGrey' />
                 <br />
                 <TextBox name="password" placeholder="New Password" parentClassName='mb-1' />
                 <TextBox name="confirm-password" placeholder="Confirm Password" />

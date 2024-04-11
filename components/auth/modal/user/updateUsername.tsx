@@ -34,7 +34,7 @@ export default function UpdateUsernameModal({onClose}:{onClose:Function}) {
                     headers: { "captcha-token": captchaToken },
                 });
 
-                if (data.status) {
+                if (data.success) {
                     return Promise.resolve(data);
                 }
             } catch (error: any) {
