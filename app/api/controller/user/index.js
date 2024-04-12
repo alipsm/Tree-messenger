@@ -7,6 +7,7 @@ const { getCaptchaToken } = require("../../utils/getCaptchaToken");
 const { generateHash, checkHash } = require("../../utils/generateHash");
 const { recaptchaValidator } = require("../../middlewares/recaptchaValidator");
 const { decryptClientCipherText } = require("../../utils/DecryptClientCipherText");
+const { generateQuickId } = require("../../utils/generateQuickId");
 
 module.exports.signUp = async (req, res) => {
    try {
@@ -189,7 +190,7 @@ module.exports.update = async (req, res) => {
       if (isRecaptchaValid.success !== true)
          throw new Error("Invalid reCaptcha token");
 
-      const { username, password, old_password } = req.body;
+      const { username, password, old_password , quick_id } = req.body;
 
       const isExistUsername = await User.findOne({ username }).catch(() => { throw Error() })
       if (isExistUsername)
@@ -203,6 +204,7 @@ module.exports.update = async (req, res) => {
          });
 
       username && (getUser.username = username)
+      quick_id && (getUser.quick_id = generateQuickId())
       if (old_password) {
          const getOriginalPassword = await decryptClientCipherText(old_password)
          const isSamePassWithDb = await checkHash(getOriginalPassword, getUser.password).catch(() => { throw new Error() })
@@ -215,13 +217,14 @@ module.exports.update = async (req, res) => {
             throw new Error("Your old password is wrong!")
       }
 
-      const token = generateJWT({ username });
+      const token = generateJWT({ username:getUser.username });
       getUser.token = token
 
       await getUser.save()
       return res.status(200).json({
          token: token,
-         username: username,
+         username: getUser.username,
+         quick_id:getUser.quick_id,
          success: true
       });
    } catch (error) {

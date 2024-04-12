@@ -1,8 +1,5 @@
 const mongoose = require("mongoose");
-const { customAlphabet } = require('nanoid');
-const alphabet = '0123456789';
-const nanoid = customAlphabet(alphabet, 4);
-
+const { generateQuickId } = require("../utils/generateQuickId");
 
 const TodoSchema = new mongoose.Schema({
   username: {
@@ -16,7 +13,7 @@ const TodoSchema = new mongoose.Schema({
   quick_id:{
     type: String,
     required: true,
-    default: () => nanoid(7),
+    default: () => generateQuickId(),
     index: { unique: true }
   },
   token:{
