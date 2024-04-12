@@ -20,6 +20,6 @@ router.put("/update", loginSchema, userController.update);
 router.get("/core", userController.core)
 
 // DELETE methods
-router.delete("/delete/:id", loginSchema, userController.delete);
+router.delete("/delete", loginSchema, userController.delete);
 
 module.exports = router;

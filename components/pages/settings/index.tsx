@@ -15,6 +15,7 @@ import ListItems from "@/components/ui/list";
 import useApi from "@/hooks/useApi";
 import useAppStore from "@/hooks/useStore";
 import useToast from "@/hooks/useToast";
+import DeleteUserModal from "@/components/auth/modal/user/deleteUser";
 
 export default function SettingPage() {
 
@@ -34,7 +35,7 @@ export default function SettingPage() {
       mutationFn: async () => {
          try {
             const data: any = await delete_(`/user/delete/${user.username}`);
-            if (data?.status) {
+            if (data?.success) {
                return Promise.resolve(data);
             }
          } catch (error: any) {
@@ -91,7 +92,7 @@ export default function SettingPage() {
                Change Quick ID
             </span>
          </div>,
-         <Button text="Delete Account" onclick={mutation.mutate} parentClassName="m-auto" className=" text-red text-center" type="Text" />,
+         <Button text="Delete Account" onclick={() => setModalsData({ ...modalsData, deleteAccound: true })} parentClassName="m-auto" className=" text-red text-center" type="Text" />,
       ],
    };
 
@@ -145,6 +146,7 @@ export default function SettingPage() {
          {/* Auth modals for update username and password */}
          {modalsData.updateUsername && <UpdateUsernameModal onClose={(e: boolean) => setModalsData({ ...modalsData, updateUsername: e })} />}
          {modalsData.updatePassword && <UpdatePasswordModal onClose={(e: boolean) => setModalsData({ ...modalsData, updatePassword: e })} />}
+         {modalsData.deleteAccound && <DeleteUserModal onClose={(e: boolean) => setModalsData({ ...modalsData, deleteAccound: e })} />}
       </div>
    );
 }

@@ -157,10 +157,9 @@ module.exports.delete = async (req, res) => {
             message: "Sorry I can't found you! plase relogin", statusCode: 400
          });
 
-      const password = eq.params['id'];
-      if (!password) {
-         console.log("password isn't exist in the params!")
-         throw new Error("This request aborted! \n please stop request.")
+        const password = req.headers["auth-data"];
+        if (!password) {
+         throw new Error("Password is empity!")
       }
 
       const decryptedClientPass = await decryptClientCipherText(password)
