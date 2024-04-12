@@ -16,13 +16,15 @@ import useApi from "@/hooks/useApi";
 import useAppStore from "@/hooks/useStore";
 import useToast from "@/hooks/useToast";
 import DeleteUserModal from "@/components/auth/modal/user/deleteUser";
+import ChangeQuickIdModal from "@/components/auth/modal/user/changeQuickId";
 
 export default function SettingPage() {
 
    const [modalsData, setModalsData] = useState({
       updateUsername: false,
       updatePassword: false,
-      deleteAccound: false
+      changeQuickId: false,
+      deleteAccound: false,
    })
 
    const { user } = useAppStore()
@@ -87,11 +89,8 @@ export default function SettingPage() {
          </>,
       ],
       sensitive_area: [
-         <div className=" w-full text-center">
-            <span className=" text-cadetGrey cursor-pointer hover:opacity-80">
-               Change Quick ID
-            </span>
-         </div>,
+            <Button text="Change Quick ID" onclick={() => setModalsData({ ...modalsData, changeQuickId: true })} type="Text" parentClassName="m-auto" className=" text-cadetGrey"/>
+         ,
          <Button text="Delete Account" onclick={() => setModalsData({ ...modalsData, deleteAccound: true })} parentClassName="m-auto" className=" text-red text-center" type="Text" />,
       ],
    };
@@ -147,6 +146,7 @@ export default function SettingPage() {
          {modalsData.updateUsername && <UpdateUsernameModal onClose={(e: boolean) => setModalsData({ ...modalsData, updateUsername: e })} />}
          {modalsData.updatePassword && <UpdatePasswordModal onClose={(e: boolean) => setModalsData({ ...modalsData, updatePassword: e })} />}
          {modalsData.deleteAccound && <DeleteUserModal onClose={(e: boolean) => setModalsData({ ...modalsData, deleteAccound: e })} />}
+         {modalsData.changeQuickId && <ChangeQuickIdModal onClose={(e: boolean) => setModalsData({ ...modalsData, changeQuickId: e })} />}
       </div>
    );
 }
