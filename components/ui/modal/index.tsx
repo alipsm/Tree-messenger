@@ -3,7 +3,7 @@ import React, { ReactNode } from "react";
 import { IoMdArrowRoundBack } from "react-icons/io";
 
 import FadeIn from "@/components/animations/FadeIn";
-import Button from "@/components/elements/button";
+import Button from "@/components/ui/elements/button";
 
 export default function Modal({
    open,

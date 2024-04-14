@@ -8,7 +8,7 @@ import useApi from '@/hooks/useApi';
 import useToast from '@/hooks/useToast';
 import Modal from '@/components/ui/modal';
 import useAppStore from '@/hooks/useStore';
-import Button from '@/components/elements/button';
+import Button from '@/components/ui/elements/button';
 import { AiOutlineSecurityScan } from "react-icons/ai";
 
 export default function ChangeQuickIdModal({ onClose }: { onClose: Function }) {

@@ -1,5 +1,5 @@
 "use client"
-import ChatTextBox from '@/components/elements/chatTextBox'
+import ChatTextBox from '@/components/ui/elements/chatTextBox'
 import ChatCard from '@/components/ui/card/chat'
 import { useParams } from 'next/navigation'
 

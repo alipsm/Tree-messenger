@@ -4,8 +4,8 @@ import { useMutation } from "react-query";
 import { useRouter } from "next/navigation";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
-import TextBox from "@/components/elements/textbox";
-import Button from "@/components/elements/button";
+import TextBox from "@/components/ui/elements/textbox";
+import Button from "@/components/ui/elements/button";
 import useApi from "@/hooks/useApi";
 import useToast from "@/hooks/useToast";
 import useFormValidation from "@/hooks/useValidation";

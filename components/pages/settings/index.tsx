@@ -9,8 +9,8 @@ import { useMutation } from "react-query";
 
 import UpdatePasswordModal from "@/components/auth/modal/user/updatePassword";
 import UpdateUsernameModal from "@/components/auth/modal/user/updateUsername";
-import Button from "@/components/elements/button";
-import Switcher from "@/components/elements/switcher";
+import Button from "@/components/ui/elements/button";
+import Switcher from "@/components/ui/elements/switcher";
 import ListItems from "@/components/ui/list";
 import useApi from "@/hooks/useApi";
 import useAppStore from "@/hooks/useStore";

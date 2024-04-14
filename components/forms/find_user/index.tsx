@@ -9,8 +9,8 @@ import { LiaParachuteBoxSolid } from "react-icons/lia";
 import { MdMessage } from "react-icons/md";
 
 import MoveElement from "@/components/animations/MoveElement";
-import Button from "@/components/elements/button";
-import TextBox from "@/components/elements/textbox";
+import Button from "@/components/ui/elements/button";
+import TextBox from "@/components/ui/elements/textbox";
 import group_ico from "./img/group.png";
 import Modal from "@/components/ui/modal";
 import useApi from "@/hooks/useApi";

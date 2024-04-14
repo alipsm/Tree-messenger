@@ -8,8 +8,8 @@ import useApi from '@/hooks/useApi';
 import useToast from '@/hooks/useToast';
 import Modal from '@/components/ui/modal';
 import useAppStore from '@/hooks/useStore';
-import Button from '@/components/elements/button';
-import TextBox from '@/components/elements/textbox';
+import Button from '@/components/ui/elements/button';
+import TextBox from '@/components/ui/elements/textbox';
 
 export default function UpdateUsernameModal({onClose}:{onClose:Function}) {
 
