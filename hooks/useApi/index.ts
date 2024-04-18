@@ -106,7 +106,7 @@ export default function useApi() {
       if (!!!token) throw new Error("Token is null")
       try {
          return await axios
-            .get(BASE_API_ENDPOINT + path, config)
+            .delete(BASE_API_ENDPOINT + path, config)
             .then((data) => {
                return data.data;
             })

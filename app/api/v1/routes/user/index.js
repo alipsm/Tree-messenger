@@ -4,7 +4,7 @@ const express = require("express");
 const { registerSchema, loginSchema } = require("../../../validators/userValidationSchemas");
 
 // controller
-const userController = require("../../../controller/user/index")
+const userController = require("../../../controller/user/index");
 
 const router = express.Router();
 
@@ -20,6 +20,6 @@ router.put("/update", loginSchema, userController.update);
 router.get("/core", userController.core)
 
 // DELETE methods
-router.delete("/delete/:username", loginSchema, userController.delete);
+router.delete("/delete", loginSchema, userController.delete);
 
 module.exports = router;

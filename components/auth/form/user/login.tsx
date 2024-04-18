@@ -4,12 +4,13 @@ import { useMutation } from "react-query";
 import { useRouter } from "next/navigation";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
-import TextBox from "@/components/elements/textbox";
-import Button from "@/components/elements/button";
+import TextBox from "@/components/ui/elements/textbox";
+import Button from "@/components/ui/elements/button";
 import useApi from "@/hooks/useApi";
 import useToast from "@/hooks/useToast";
 import useFormValidation from "@/hooks/useValidation";
 import useAppStore from "@/hooks/useStore";
+import { encryptText } from "@/utils/encryptText";
 
 const Header = require("./layouts/header");
 const Footer = require("./layouts/footer");
@@ -41,6 +42,9 @@ export default function LoginForm() {
          console.log("validation result: ", validationResult);
 
          try {
+            let user_password = objFormData.password as string
+            objFormData.password = encryptText(user_password)
+            delete objFormData["confirm-password"]
             const captchaToken = await executeRecaptcha("inquirySubmit");
             const data: any = await post("/user/login", objFormData, {
                headers: { "captcha-token": captchaToken },

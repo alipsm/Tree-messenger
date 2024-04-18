@@ -9,19 +9,22 @@ import { useMutation } from "react-query";
 
 import UpdatePasswordModal from "@/components/auth/modal/user/updatePassword";
 import UpdateUsernameModal from "@/components/auth/modal/user/updateUsername";
-import Button from "@/components/elements/button";
-import Switcher from "@/components/elements/switcher";
+import Button from "@/components/ui/elements/button";
+import Switcher from "@/components/ui/elements/switcher";
 import ListItems from "@/components/ui/list";
 import useApi from "@/hooks/useApi";
 import useAppStore from "@/hooks/useStore";
 import useToast from "@/hooks/useToast";
+import DeleteUserModal from "@/components/auth/modal/user/deleteUser";
+import ChangeQuickIdModal from "@/components/auth/modal/user/changeQuickId";
 
 export default function SettingPage() {
 
    const [modalsData, setModalsData] = useState({
       updateUsername: false,
       updatePassword: false,
-      deleteAccound: false
+      changeQuickId: false,
+      deleteAccound: false,
    })
 
    const { user } = useAppStore()
@@ -34,7 +37,7 @@ export default function SettingPage() {
       mutationFn: async () => {
          try {
             const data: any = await delete_(`/user/delete/${user.username}`);
-            if (data?.status) {
+            if (data?.success) {
                return Promise.resolve(data);
             }
          } catch (error: any) {
@@ -86,12 +89,9 @@ export default function SettingPage() {
          </>,
       ],
       sensitive_area: [
-         <div className=" w-full text-center">
-            <span className=" text-cadetGrey cursor-pointer hover:opacity-80">
-               Change Quick ID
-            </span>
-         </div>,
-         <Button text="Delete Account" onclick={mutation.mutate} parentClassName="m-auto" className=" text-red text-center" type="Text" />,
+            <Button text="Change Quick ID" onclick={() => setModalsData({ ...modalsData, changeQuickId: true })} type="Text" parentClassName="m-auto" className=" text-cadetGrey"/>
+         ,
+         <Button text="Delete Account" onclick={() => setModalsData({ ...modalsData, deleteAccound: true })} parentClassName="m-auto" className=" text-red text-center" type="Text" />,
       ],
    };
 
@@ -145,6 +145,8 @@ export default function SettingPage() {
          {/* Auth modals for update username and password */}
          {modalsData.updateUsername && <UpdateUsernameModal onClose={(e: boolean) => setModalsData({ ...modalsData, updateUsername: e })} />}
          {modalsData.updatePassword && <UpdatePasswordModal onClose={(e: boolean) => setModalsData({ ...modalsData, updatePassword: e })} />}
+         {modalsData.deleteAccound && <DeleteUserModal onClose={(e: boolean) => setModalsData({ ...modalsData, deleteAccound: e })} />}
+         {modalsData.changeQuickId && <ChangeQuickIdModal onClose={(e: boolean) => setModalsData({ ...modalsData, changeQuickId: e })} />}
       </div>
    );
 }
