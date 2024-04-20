@@ -25,13 +25,13 @@ export default function Utils() {
             title:"Build QR Message",
             subtitle:"encrypt your message in the QR code",
             ico:<BsQrCode    className='text-cadetGrey w-6 h-6' width={20} height={20}/>,
-            link:"/dashboard/build-qr-message"
+            link:"/dashboard/build-qr"
         },
         {
             title:"Scan QR Message",
-            subtitle:"scan and encrypt you QR message",
+            subtitle:"scan your QR message",
             ico:<TbScan className='text-cadetGrey w-6 h-6' width={20} height={20}/>,
-            link:"/dashboard/encrypt-qr-message"
+            link:"/dashboard/scan-qr"
         }
     ]
   return (
