@@ -38,9 +38,10 @@ export default function TextBox(props: TextBoxInterface) {
             maxLength={props.maxLength}
             onKeyDown={(!!props.number && checkNumberValue) || undefined}
             onChange={(e) => props.getValue?.(e)}
+            disabled={props.disabled}
             style={{ outlineColor: positionType?.color }}
             placeholder={props.placeholder}
-            className={` w-full text-white outline-none bg-shark py-3 px-4 rounded placeholder-cadetGrey outline-1 text-base tablet:text-lg ${props.className}`}
+            className={` w-full text-white outline-none bg-shark py-3 px-4 rounded placeholder-cadetGrey outline-1 text-base tablet:text-lg disabled:cursor-default disabled:opacity-40 transition-opacity ${props.className}`}
             name={props.name}
          />
 

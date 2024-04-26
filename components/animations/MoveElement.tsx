@@ -1,18 +1,19 @@
 'use client'
 import React from 'react'
-import { motion } from 'framer-motion'
+import { AnimationControls, AnimationProps, TargetAndTransition, VariantLabels, motion } from 'framer-motion'
 import { usePathname } from 'next/navigation'
 
-
+type animateType = AnimationControls|VariantLabels|TargetAndTransition
+type initialType = VariantLabels
 export default function MoveElement({
-    key, duration=1, delay=0,initial , animate , className, children, resetWithNavigate=false
+    refreshKey, duration=1, delay=0,initial , animate , className, children, resetWithNavigate=false
 }: {
-    key?: any, duration?: number, delay?: number,initial:object,animate:object, className?: string, children: React.ReactNode, resetWithNavigate?: boolean
+    refreshKey?: any, duration?: number, delay?: number,initial:object,animate:animateType, className?: string, children?: React.ReactNode, resetWithNavigate?: boolean
 }) {
 
     return (
         <motion.div
-            key={choiseKey(key,resetWithNavigate)}
+            key={choiseKey(refreshKey,resetWithNavigate)}
             initial={initial}
             animate={animate}
             transition={{ duration, delay }}

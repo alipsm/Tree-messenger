@@ -42,7 +42,7 @@ export default function TextArea(props: TextAreaInterface) {
             onChange={(e) => props.getValue?.(e)}
             style={{ outlineColor: positionType?.color }}
             placeholder={props.placeholder}
-            className={` w-full text-white outline-none max-h-60 bg-shark py-3 px-4 rounded placeholder-cadetGrey outline-1 text-base tablet:text-lg ${props.className}`}
+            className={` w-full text-white outline-none max-h-60 min-h-14 bg-shark py-3 px-4 rounded placeholder-cadetGrey outline-1 text-base tablet:text-lg ${props.className}`}
             name={props.name}
          />
 

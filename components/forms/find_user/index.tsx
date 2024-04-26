@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import React, { useState } from "react";
 import { useMutation } from "react-query";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
@@ -11,7 +10,6 @@ import { MdMessage } from "react-icons/md";
 import MoveElement from "@/components/animations/MoveElement";
 import Button from "@/components/ui/elements/button";
 import TextBox from "@/components/ui/elements/textbox";
-import group_ico from "./img/group.png";
 import Modal from "@/components/ui/modal";
 import useApi from "@/hooks/useApi";
 import useToast from "@/hooks/useToast";
@@ -62,19 +60,8 @@ export default function FindUserForm() {
    });
 
    return (
-      <div className="w-full h-full flex justify-center items-center flex-col gap-4 text-white relative">
-         <div className="relative flex justify-center items-center flex-col  -top-24">
-            <div className=" flex justify-start flex-col items-start w-max h-max relative z-0">
-               <Image src={group_ico} alt="group" className=" w-64 h-64 z-10" />
-               <div className="p-[15%] absolute top-0 left-0 w-full h-full">
-                  <div
-                     style={{ animationDuration: "40s" }}
-                     className="  border-4 border-dashed border-white  w-full h-full rounded-full animate-spin"
-                  ></div>
-               </div>
-            </div>
+      <div className="w-full h-full flex justify-start items-center flex-col gap-4 text-white relative">
             <p className=" text-lg ">Enter your friend's quick-ID</p>
-         </div>
          <form
             onSubmit={mutation.mutate}
             action=""

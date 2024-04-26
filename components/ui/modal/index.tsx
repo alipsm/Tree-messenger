@@ -12,20 +12,20 @@ export default function Modal({
 }: {
    open: boolean;
    children: ReactNode;
-   onClose: Function;
+   onClose?: Function;
 }) {
    return (
-      <FadeIn key={`${open}`} duration={0.2}>
+      <FadeIn refreshKey={`${open}`} duration={0.2}>
          <div
             className={`${
                open ? "opacity-100" : " opacity-0 hidden"
             } bg-mirage bg-opacity-80 transition-all w-full h-full flex justify-center items-center absolute after:content-none after:relative left-0 top-0 z-50`}
          >
-            <div className=" border-2 z-30 border-cadetGrey relative flex justify-center flex-col items-center bg-shark bg-opacity-80 w-max h-max py-4 px-6 rounded-xl">
+            <div className=" border-2 z-30 border-cadetGrey relative flex justify-center flex-col items-center bg-shark bg-opacity-80 w-max h-max py-10 px-12 rounded-xl">
                <Button
                   text={
                      <IoMdArrowRoundBack
-                        onClick={() => onClose(false)}
+                        onClick={() => onClose?.(false)}
                         className="text-cadetGrey w-6 h-6"
                      />
                   }

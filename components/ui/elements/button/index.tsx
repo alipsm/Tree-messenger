@@ -15,7 +15,7 @@ interface ButtonInterface {
 
 export default function Button(props: ButtonInterface) {
    return (
-      <div className={`${props.parentClassName} max-w-80 text-white`}>
+      <div className={`${props.parentClassName} max-w-80 w-fit text-white`}>
          <button
             type={props.submit ? "submit" : "button"}
             disabled={props.loading ? true:false}
