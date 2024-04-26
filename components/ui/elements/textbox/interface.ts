@@ -12,6 +12,7 @@ interface TextBoxInterface {
     number?:boolean
     maxLength?:number
     removeAutoComplete?:boolean
+    disabled?:boolean
 }
 
 export default TextBoxInterface
