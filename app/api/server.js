@@ -3,7 +3,9 @@ const express = require('express');
 var bodyParser = require('body-parser')
 
 const { connectToDatabase } = require("./database/db");
+
 const userRoutes =  require("./v1/routes/user")
+const encryptionRoutes =  require("./v1/routes/encryption")
 
 const app = express();
 
@@ -20,6 +22,7 @@ app.use(bodyParser.json());
 
 // routes
 app.use("/user",userRoutes)
+app.use("/encryption",encryptionRoutes)
 
 
 app.listen(5000, () => {

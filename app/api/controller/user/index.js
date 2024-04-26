@@ -6,7 +6,7 @@ const { generateJWT, decodeJWT } = require("../../jwt/generate");
 const { getCaptchaToken } = require("../../utils/getCaptchaToken");
 const { generateHash, checkHash } = require("../../utils/generateHash");
 const { recaptchaValidator } = require("../../middlewares/recaptchaValidator");
-const { decryptClientCipherText } = require("../../utils/DecryptClientCipherText");
+const { decryptClientCipherText } = require("../../utils/encryption");
 const { generateQuickId } = require("../../utils/generateQuickId");
 
 module.exports.signUp = async (req, res) => {
