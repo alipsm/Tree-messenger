@@ -15,7 +15,7 @@ export default function Modal({
    onClose?: Function;
 }) {
    return (
-      <FadeIn key={`${open}`} duration={0.2}>
+      <FadeIn refreshKey={`${open}`} duration={0.2}>
          <div
             className={`${
                open ? "opacity-100" : " opacity-0 hidden"

@@ -22,7 +22,7 @@ export default function SideBar() {
          } tablet:inline-block tablet:w-80 tablet:min-w-80 px-6 py-4`}
       >
          <Switcher onChange={setSwitchValue} />
-         <FadeIn key={switchValue}>
+         <FadeIn refreshKey={switchValue}>
             {switchValue === "chats" ? <Contacts /> : <Utils />}
          </FadeIn>
          <Banner />
