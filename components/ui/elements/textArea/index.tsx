@@ -33,11 +33,11 @@ export default function TextArea(props: TextAreaInterface) {
    return (
       <div className={`${props.parentClassName} relative`}>
          <textarea
-            // autoComplete={props.removeAutoComplete?"off":undefined}
-            // maxLength={props.maxLength}
-         id=""
-        cols={10} 
-        rows={10}
+            id=""
+            cols={10}
+            dir="auto"
+            rows={10}
+            maxLength={props.maxLength}
             onKeyDown={(!!props.number && checkNumberValue) || undefined}
             onChange={(e) => props.getValue?.(e)}
             style={{ outlineColor: positionType?.color }}

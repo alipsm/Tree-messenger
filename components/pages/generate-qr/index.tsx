@@ -101,7 +101,7 @@ export default function BuildQrMessage({ getProtect }: { getProtect?: Function }
   return (
     <div className='flex w-full h -full flex-col justify-center items-center' id='hiiiii'>
       <form onSubmit={mutation.mutate} className=' flex flex-col justify-start items-center gap-4'>
-        <TextArea placeholder='Message' name='message' parentClassName='w-full' />
+        <TextArea placeholder='Message' name='message' parentClassName='w-full' maxLength={110} />
         <Switcher items={["Encryption", "non-Encryption"]} onChange={handleProtectStatus} defaultItem='Encryption' />
         {/* <div className='flex relative justify-end items-center gap-2'>
           <Switcher items={["Password", "non-Password"]} onChange={handleProtectStatus} defaultItem='Password' />

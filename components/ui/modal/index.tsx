@@ -21,7 +21,7 @@ export default function Modal({
                open ? "opacity-100" : " opacity-0 hidden"
             } bg-mirage bg-opacity-80 transition-all w-full h-full flex justify-center items-center absolute after:content-none after:relative left-0 top-0 z-50`}
          >
-            <div className=" border-2 z-30 border-cadetGrey relative flex justify-center flex-col items-center bg-shark bg-opacity-80 w-max h-max py-10 px-12 rounded-xl">
+            <div className=" border-2 z-30 border-cadetGrey relative flex justify-center flex-col items-center bg-shark bg-opacity-80 w-max h-max py-10 px-12 rounded-xl max-w-[70%] min-w-60">
                <Button
                   text={
                      <IoMdArrowRoundBack
