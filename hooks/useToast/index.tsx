@@ -7,7 +7,7 @@ export default function useToast() {
    }
 
    function error(message: any) {
-      toast.error(message);
+      toast.error(message||"Error !");
    }
 
    function toaster() {

@@ -61,7 +61,7 @@ function validation(
          const checkLenghtPass = new RegExp("(?=.{6,})"); //check lenght pass
          if (!checkLenghtPass.test(value[0])) {
             CHECK = false;
-            message = "Password must be more than 8 characters.";
+            message = "Password must be more than 6 characters.";
          }
          break;
       case "confirm-password":
